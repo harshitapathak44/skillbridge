@@ -1,134 +1,78 @@
-# ⬡ SkillBridge AI Agent
+# SkillBridge
 
-> AI-powered personalized career roadmap generator — built with Node.js, Express & Claude API.
-
----
-
-## 📁 Folder Structure
-
-```
-skillbridge/
-├── public/
-│   ├── index.html       ← Single-page frontend
-│   ├── styles.css       ← Full dark industrial UI
-│   └── script.js        ← Form logic, API calls, rendering
-├── server.js            ← Express backend + Claude integration
-├── package.json         ← Dependencies
-├── .env                 ← Your API key (create from .env.example)
-├── .env.example         ← Template for env variables
-└── README.md            ← This file
-```
+AI-powered Career Roadmap & Skill Gap Analysis Agent for students.  
+Built during the Hack The Vibe Hackathon.
 
 ---
 
-## ⚙️ Setup & Run Instructions
+## 🚀 Overview
 
-### Step 1 — Prerequisites
-Make sure you have:
-- **Node.js** v18+ installed → https://nodejs.org
-- An **Anthropic API Key** → https://console.anthropic.com
+SkillBridge is an AI Career Agent that helps students identify skill gaps, assess readiness for their target role, and generate a structured learning roadmap based on personal constraints.
 
 ---
 
-### Step 2 — Install Dependencies
+## 🎥 Demo
 
-Open your terminal in the `skillbridge/` folder:
-
-```bash
-npm install
-```
+Demo Video:<video controls src="clideo_editor_0e80ec23d8b2409180a3e9e854fcf9c0.mp4" title="demo video"></video>
 
 ---
 
-### Step 3 — Create your `.env` file
+## 🤖 AI Agent
 
-```bash
-cp .env.example .env
-```
+Powered using **OpenRouter API**.
 
-Then open `.env` and paste your key:
+The agent analyzes 4 key inputs:
 
-```
-ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxxxxxx
-PORT=3000
-```
+- Confidence Level  
+- Current Skills  
+- Desired Job Role  
+- Weekly Study Hours  
 
----
-
-### Step 4 — Start the Server
-
-```bash
-npm start
-```
-
-Or with auto-reload during development:
-
-```bash
-npm run dev
-```
+Based on this, it generates personalized career guidance and execution plans.
 
 ---
 
-### Step 5 — Open in Browser
+## ✨ Features
 
-Visit: **http://localhost:3000**
-
----
-
-## 🧠 How It Works
-
-1. User fills in: Confidence level, Current skills, Desired job, Weekly hours
-2. Frontend sends a `POST /analyze` request to the Express backend
-3. Backend calls Claude API with the SkillBridge system prompt
-4. Claude returns a structured JSON roadmap
-5. Frontend renders the results in beautiful cards
+- Skill Gap Analysis  
+- 4 Phase Learning Plan
+- AI-Generated Roadmap  
+- Free Resource Recomendations
+- Honest Feedback and Motivation
 
 ---
 
-## 🔌 API Endpoint
+## 🛠 Tech Stack
 
-```
-POST /analyze
-Content-Type: application/json
-
-Body:
-{
-  "confidence": "7",
-  "skills": "HTML, CSS, Python basics",
-  "desiredJob": "Full Stack Developer",
-  "weeklyHours": "15"
-}
-
-Response:
-{
-  "success": true,
-  "data": { ...roadmap JSON... }
-}
-```
+- HTML  
+- CSS  
+- JavaScript  
+- Node.js 
+- OpenRouter API  
 
 ---
 
-## 📦 Tech Stack
+## 🧠 Vibe Log
 
-| Layer     | Technology             |
-|-----------|------------------------|
-| Frontend  | HTML5, CSS3, Vanilla JS |
-| Backend   | Node.js + Express       |
-| AI Model  | Claude (Anthropic SDK)  |
-| Fonts     | Syne, DM Mono, Lora     |
+**Day 1:** Ideation, problem definition, feature planning using ChatGPT.  
+**Day 2:** Frontend development, charts, logic, prompt structuring (Claude Console).  
+**Day 3:** OpenRouter AI integration, progress tracking, UI polish, debugging.
 
----
-
-## 🆓 Features
-
-- ✅ Free resource recommendations only (no paid courses)
-- ✅ India-focused job market context
-- ✅ 4-phase structured roadmap
-- ✅ Honest AI feedback
-- ✅ YouTube + Docs + Practice platform links
-- ✅ Responsive mobile-friendly UI
-- ✅ Raw JSON toggle for developers
+**AI Usage:** ChatGPT and Claude were used for planning, prompt engineering, debugging, and UI suggestions. Core logic and integration were implemented manually.
 
 ---
 
-Built for hackathons. Copy-paste ready. Zero paid dependencies.
+## ⚙️ Setup
+
+1. Clone repo  
+2. Open `index.html`  
+3. Add OpenRouter API key in `script.js`  
+
+---
+
+## 👥 Neural Ninjas
+
+- Vranda Agarwal  
+- Harshita Pathak  
+- Pawani Dubey  
+---
