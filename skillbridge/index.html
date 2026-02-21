@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge AI — Career Roadmap Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient background orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">◈</span>
+        <span class="brand-name">SkillBridge <em>AI</em></span>
+      </div>
+      <div class="header-meta">
+        <span class="pill">Free Resources Only</span>
+        <span class="pill">India Focused</span>
+        <span class="pill pill-live">● AI Powered</span>
+      </div>
+    </div>
+    <p class="header-sub">Enter your profile. Get a real, personalized career roadmap — no fluff, no paid courses.</p>
+  </header>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <main class="main-layout">
+
+    <!-- ===== INPUT PANEL ===== -->
+    <aside class="input-panel">
+      <div class="panel-header">
+        <span class="step-num">01</span>
+        <span class="panel-title">Your Profile</span>
+      </div>
+
+      <!-- Confidence -->
+      <div class="field-group">
+        <label class="field-label" for="confidence">
+          Confidence Level
+          <span class="field-hint">How confident are you in learning tech skills?</span>
+        </label>
+        <div class="slider-row">
+          <span class="slider-emoji" id="confEmoji">😐</span>
+          <input type="range" id="confidence" min="1" max="10" value="5" class="slider" />
+          <span class="slider-val" id="confVal">5</span>
+        </div>
+        <div class="slider-labels">
+          <span>Nervous</span><span>Confident</span>
+        </div>
+      </div>
+
+      <!-- Desired Role -->
+      <div class="field-group">
+        <label class="field-label" for="role">
+          Desired Job Role <span class="req">*</span>
+          <span class="field-hint">Be specific — not just "developer"</span>
+        </label>
+        <input type="text" id="role" class="field-input" placeholder="e.g. Full Stack Developer, Data Analyst, DevOps Engineer…" />
+      </div>
+
+      <!-- Current Skills -->
+      <div class="field-group">
+        <label class="field-label" for="skills">
+          Current Skills <span class="req">*</span>
+          <span class="field-hint">Comma-separated</span>
+        </label>
+        <input type="text" id="skills" class="field-input" placeholder="e.g. HTML, CSS, Basic Python, Excel, Git…" />
+      </div>
+
+      <!-- Weak Areas -->
+      <div class="field-group">
+        <label class="field-label" for="weak">
+          Weak Areas
+          <span class="field-hint">Optional — what do you struggle with?</span>
+        </label>
+        <input type="text" id="weak" class="field-input" placeholder="e.g. DSA, System Design, Math, Communication…" />
+      </div>
+
+      <!-- Education -->
+      <div class="field-group">
+        <label class="field-label" for="education">Education Level</label>
+        <select id="education" class="field-select">
+          <option value="High School">High School (10th/12th)</option>
+          <option value="Diploma">Diploma / Polytechnic</option>
+          <option value="BCA/BSc CS" selected>BCA / BSc CS</option>
+          <option value="BTech/BE">BTech / BE</option>
+          <option value="MCA/MTech">MCA / MTech</option>
+          <option value="Non-CS Graduate">Non-CS Graduate</option>
+          <option value="Self-Taught">Self-Taught / Dropout</option>
+        </select>
+      </div>
+
+      <!-- Weekly Hours -->
+      <div class="field-group">
+        <label class="field-label" for="hours">Weekly Hours Available</label>
+        <select id="hours" class="field-select">
+          <option value="5">5 hrs/week — Very Busy</option>
+          <option value="10" selected>10 hrs/week — Part-time</option>
+          <option value="15">15 hrs/week — Moderate</option>
+          <option value="20">20 hrs/week — Dedicated</option>
+          <option value="30">30 hrs/week — Serious</option>
+          <option value="40">40 hrs/week — Bootcamp Mode</option>
+        </select>
+      </div>
+
+      <!-- Location -->
+      <div class="field-group">
+        <label class="field-label" for="location">Location</label>
+        <input type="text" id="location" class="field-input" placeholder="India (default)" value="India" />
+      </div>
+
+      <button class="generate-btn" id="genBtn" onclick="generateRoadmap()">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">Generate My Roadmap</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <p class="disclaimer">Powered by Claude AI · 100% free resources · No login required</p>
+    </aside>
+
+    <!-- ===== OUTPUT PANEL ===== -->
+    <section class="output-panel" id="outputPanel">
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">◈</div>
+        <h2>Your roadmap will appear here</h2>
+        <p>Fill in your profile on the left and hit <strong>Generate My Roadmap</strong>. We'll analyze your background and build a realistic, week-by-week learning plan — completely free.</p>
+        <div class="empty-features">
+          <div class="ef-item"><span>✓</span> Skill gap analysis</div>
+          <div class="ef-item"><span>✓</span> 4-phase roadmap</div>
+          <div class="ef-item"><span>✓</span> Free YouTube + docs resources</div>
+          <div class="ef-item"><span>✓</span> Honest feedback</div>
+          <div class="ef-item"><span>✓</span> Backup career paths</div>
+          <div class="ef-item"><span>✓</span> Weekly schedule plan</div>
+        </div>
+      </div>
+
+      <!-- Loader -->
+      <div class="loader-state" id="loaderState">
+        <div class="loader-ring"></div>
+        <div class="loader-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p class="loader-text" id="loaderText">Analyzing your profile…</p>
+        <p class="loader-sub">Building a personalized roadmap</p>
+      </div>
+
+      <!-- Results (injected by JS) -->
+      <div class="results-wrap" id="resultsWrap"></div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

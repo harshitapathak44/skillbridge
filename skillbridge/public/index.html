@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillBridge AI — Career Roadmap Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Background canvas grain -->
+    <div class="bg-layer" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ══════════ HEADER ══════════ -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="logo-wrap">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">SkillBridge<span class="logo-ai"> AI</span></span>
+        </div>
+        <p class="header-tagline">Turn your skills into a career — with AI-powered roadmaps</p>
+        <div class="header-badges">
+          <span class="badge">Free Resources Only</span>
+          <span class="badge">India-Focused</span>
+          <span class="badge">AI Powered</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════ MAIN ══════════ -->
+    <main class="main-wrap">
+
+      <!-- ── FORM SECTION ── -->
+      <section class="form-section" id="formSection">
+        <div class="section-eyebrow">Step 01 — Your Profile</div>
+        <h2 class="section-heading">Tell us about yourself</h2>
+
+        <form id="analyzeForm" class="form-card" novalidate>
+          <!-- Confidence Slider -->
+          <div class="field-group">
+            <label class="field-label" for="confidence">
+              Confidence Level
+              <span class="field-hint">How confident are you in your tech skills?</span>
+            </label>
+            <div class="slider-container">
+              <div class="slider-track">
+                <input
+                  type="range"
+                  id="confidence"
+                  name="confidence"
+                  min="1"
+                  max="10"
+                  value="5"
+                  class="slider"
+                />
+                <div class="slider-fill" id="sliderFill"></div>
+              </div>
+              <div class="slider-labels">
+                <span>1 — Newbie</span>
+                <div class="slider-value-bubble" id="sliderBubble">5</div>
+                <span>10 — Expert</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Skills -->
+          <div class="field-group">
+            <label class="field-label" for="skills">
+              Current Skills
+              <span class="field-hint">List everything you know (comma-separated)</span>
+            </label>
+            <input
+              type="text"
+              id="skills"
+              name="skills"
+              class="field-input"
+              placeholder="e.g. HTML, CSS, Basic Python, Excel, Canva..."
+              required
+            />
+          </div>
+
+          <!-- Desired Job -->
+          <div class="field-group">
+            <label class="field-label" for="desiredJob">
+              Desired Job Role
+              <span class="field-hint">What role do you want to land?</span>
+            </label>
+            <input
+              type="text"
+              id="desiredJob"
+              name="desiredJob"
+              class="field-input"
+              placeholder="e.g. Full Stack Developer, Data Analyst, DevOps Engineer..."
+              required
+            />
+          </div>
+
+          <!-- Weekly Hours -->
+          <div class="field-group">
+            <label class="field-label" for="weeklyHours">
+              Weekly Learning Hours
+              <span class="field-hint">How many hours per week can you study?</span>
+            </label>
+            <div class="select-wrap">
+              <select id="weeklyHours" name="weeklyHours" class="field-select" required>
+                <option value="" disabled selected>Select your weekly hours</option>
+                <option value="5">5 hrs/week — Very Busy</option>
+                <option value="10">10 hrs/week — Part-time Learner</option>
+                <option value="15">15 hrs/week — Moderate Commitment</option>
+                <option value="20">20 hrs/week — Dedicated Learner</option>
+                <option value="30">30 hrs/week — High Focus Mode</option>
+                <option value="40">40+ hrs/week — Full Bootcamp Mode</option>
+              </select>
+              <span class="select-arrow">↓</span>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn-generate" id="generateBtn">
+              <span class="btn-text">Generate My Roadmap</span>
+              <span class="btn-icon">⚡</span>
+            </button>
+            <p class="form-disclaimer">Your data is never stored. Results generated in real-time.</p>
+          </div>
+        </form>
+      </section>
+
+      <!-- ── LOADER ── -->
+      <div class="loader-wrap" id="loader" hidden>
+        <div class="loader-inner">
+          <div class="loader-rings">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+            <span class="loader-icon">⬡</span>
+          </div>
+          <p class="loader-title">Analyzing your profile...</p>
+          <div class="loader-steps" id="loaderSteps">
+            <span class="lstep active" data-step="0">Mapping skill gaps</span>
+            <span class="lstep" data-step="1">Building roadmap</span>
+            <span class="lstep" data-step="2">Curating resources</span>
+            <span class="lstep" data-step="3">Finalizing feedback</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ERROR ── -->
+      <div class="error-wrap" id="errorWrap" hidden>
+        <div class="error-card">
+          <span class="error-icon">⚠</span>
+          <h3 class="error-title">Something went wrong</h3>
+          <p class="error-msg" id="errorMsg">Please try again.</p>
+          <button class="btn-retry" onclick="resetForm()">Try Again</button>
+        </div>
+      </div>
+
+      <!-- ══════════ RESULTS ══════════ -->
+      <section class="results-wrap" id="resultsWrap" hidden>
+        <div class="results-header">
+          <div class="section-eyebrow">Step 02 — Your Roadmap</div>
+          <h2 class="section-heading">Your Personalized Career Plan</h2>
+          <button class="btn-reset" onclick="resetForm()">← Start Over</button>
+        </div>
+
+        <!-- Profile Summary Card -->
+        <div class="result-card card-profile" id="cardProfile">
+          <div class="card-eyebrow">Profile Analysis</div>
+          <div class="profile-grid">
+            <div class="profile-summary" id="profileSummary"></div>
+            <div class="profile-stats">
+              <div class="stat-box">
+                <div class="stat-label">Current Level</div>
+                <div class="stat-value" id="statLevel"></div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Best-Fit Role</div>
+                <div class="stat-value" id="statRole"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Roles Card -->
+        <div class="result-card card-roles" id="cardRoles">
+          <div class="card-eyebrow">Career Path</div>
+          <div class="primary-role-wrap">
+            <div class="primary-role-label">Primary Recommendation</div>
+            <div class="primary-role" id="primaryRole"></div>
+          </div>
+          <div class="alt-roles-wrap">
+            <div class="alt-roles-label">Backup Roles</div>
+            <div class="alt-roles-list" id="altRoles"></div>
+          </div>
+        </div>
+
+        <!-- Skill Gaps Card -->
+        <div class="result-card card-gaps" id="cardGaps">
+          <div class="card-eyebrow">Skill Gap Analysis</div>
+          <h3 class="card-title">What you need to learn</h3>
+          <div class="gaps-list" id="gapsList"></div>
+        </div>
+
+        <!-- Roadmap Card -->
+        <div class="result-card card-roadmap" id="cardRoadmap">
+          <div class="card-eyebrow">Learning Roadmap</div>
+          <h3 class="card-title">Your 4-Phase Journey</h3>
+          <div class="phases-grid" id="phasesGrid"></div>
+        </div>
+
+        <!-- Schedule Card -->
+        <div class="result-card card-schedule" id="cardSchedule">
+          <div class="card-eyebrow">Weekly Schedule</div>
+          <h3 class="card-title">How to structure your time</h3>
+          <div class="schedule-box" id="scheduleBox"></div>
+        </div>
+
+        <!-- Resources Card -->
+        <div class="result-card card-resources" id="cardResources">
+          <div class="card-eyebrow">Free Learning Resources</div>
+          <h3 class="card-title">Everything you need — all free</h3>
+          <div class="resources-tabs">
+            <button class="res-tab active" data-tab="youtube">📺 YouTube</button>
+            <button class="res-tab" data-tab="docs">📄 Docs</button>
+            <button class="res-tab" data-tab="practice">💻 Practice</button>
+          </div>
+          <div class="resources-panel" id="resYoutube" data-panel="youtube"></div>
+          <div class="resources-panel hidden" id="resDocs" data-panel="docs"></div>
+          <div class="resources-panel hidden" id="resPractice" data-panel="practice"></div>
+        </div>
+
+        <!-- Feedback Card -->
+        <div class="result-card card-feedback" id="cardFeedback">
+          <div class="card-eyebrow">Honest Feedback</div>
+          <div class="feedback-text" id="feedbackText"></div>
+          <div class="motivation-wrap">
+            <div class="motivation-label">Motivation</div>
+            <div class="motivation-text" id="motivationText"></div>
+          </div>
+        </div>
+
+        <!-- JSON Output (collapsible) -->
+        <details class="json-details">
+          <summary class="json-summary">View Raw JSON Output</summary>
+          <pre class="json-output" id="jsonOutput"></pre>
+        </details>
+
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy NEURAL NINJAS· SkillBridge — Open Source Career Tool · India 🇮🇳</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
