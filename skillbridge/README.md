@@ -13,7 +13,7 @@ SkillBridge is an AI Career Agent that helps students identify skill gaps, asses
 
 ## 🎥 Demo
 
-Demo Video:<video controls src="clideo_editor_0e80ec23d8b2409180a3e9e854fcf9c0.mp4" title="demo video"></video>
+Demo Video:https://drive.google.com/file/d/11VBtUjALYUGHi613mieHeujYbnjzJG1O/view?usp=drive_link
 
 ---
 
